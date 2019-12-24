@@ -1,16 +1,16 @@
-var test = require('ava')
-var nanocontent = require('.')
+const test = require('ava')
+const nanocontent = require('.')
 
 test('readPageSync works', function (t) {
   var page = nanocontent.readPageSync('example/content/about')
-  t.is(page.title, 'About')
-  t.is(page.view, 'custom')
+  t.is(page.data.title, 'About')
+  t.is(page.data.view, 'custom')
 })
 
 test('readPage works', async function (t) {
   var page = await nanocontent.readPage('example/content/about')
-  t.is(page.title, 'About')
-  t.is(page.view, 'custom')
+  t.is(page.data.title, 'About')
+  t.is(page.data.view, 'custom')
 })
 
 test('readPageSync and readPage outputs are the same', async function (t) {
@@ -21,8 +21,8 @@ test('readPageSync and readPage outputs are the same', async function (t) {
 
 test('readSiteSync works', function (t) {
   var site = nanocontent.readSiteSync('example/content')
-  t.is(site['/example/content'].title, 'Example')
-  t.is(site['/example/content/about'].title, 'About')
+  t.is(site['/example/content'].data.title, 'Example')
+  t.is(site['/example/content/about'].data.title, 'About')
 })
 
 test('readSiteSync and readSite outputs are the same', async function (t) {
@@ -32,7 +32,7 @@ test('readSiteSync and readSite outputs are the same', async function (t) {
 })
 
 test('readSiteSync and readSite outputs are the same with parent option', async function (t) {
-  var syncSite = nanocontent.readSiteSync('example/content', { parent: true })
-  var asyncSite = await nanocontent.readSite('example/content', { parent: true })
+  var syncSite = nanocontent.readSiteSync('example/content', { remove: true })
+  var asyncSite = await nanocontent.readSite('example/content', { remove: true })
   t.deepEqual(syncSite, asyncSite)
 })

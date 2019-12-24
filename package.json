@@ -4,34 +4,36 @@
   "description": "read a directory of content into an object",
   "main": "index.js",
   "scripts": {
-    "test": "standard; ava"
+    "test": "ava"
   },
   "keywords": [],
   "author": "Jon-Kyle <contact@jon-kyle.com> (http://jon-kyle.com)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/jondashkyle/nanocontent/issues"
+    "url": "https://github.com/robinscholz/nanocontent/issues"
   },
-  "homepage": "https://github.com/jondashkyle/nanocontent#readme",
+  "homepage": "https://github.com/robinscholz/nanocontent#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jondashkyle/nanocontent.git"
+    "url": "git+https://github.com/robinscholz/nanocontent.git"
   },
   "dependencies": {
     "glob": "^7.1.2",
+    "gray-matter": "^4.0.2",
     "js-yaml": "^3.10.0",
     "normalize-path": "^3.0.0",
-    "object-keys": "^1.0.11",
-    "object-values": "^2.0.0",
     "pify": "^3.0.0",
     "promisify-node": "^0.4.0",
-    "smarkt": "0.0.6",
     "static-module": "^2.2.5",
-    "through2": "^2.0.3",
-    "xtend": "^4.0.1"
+    "through2": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "ava": "^0.25.0",
-    "standard": "^11.0.1"
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1"
   }
 }

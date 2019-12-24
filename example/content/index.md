@@ -1,0 +1,4 @@
+---
+title: Example
+text: yeah *whatsup*
+---

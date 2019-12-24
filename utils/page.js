@@ -6,6 +6,6 @@ module.exports = {
 }
 
 function isPage (pathPage) {
-  assert.equal(typeof pathPage, 'string', 'arg1 pathPage must be type string')
+  assert.strictEqual(typeof pathPage, 'string', 'pathPage must be type string')
   return path.extname(pathPage) === ''
 }

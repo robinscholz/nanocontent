@@ -19,7 +19,6 @@ Introducing flat content state. Read directories of content into an object.
 - Each directory is a page
 - The content for each page is stored in a text file
 - Your file system becomes a router!
-- Pairs nicely with [`nanopage`](https://github.com/jondashkyle/nanopage) for traversing object structure
 
 ```
 npm install nanocontent --save
@@ -27,11 +26,11 @@ npm install nanocontent --save
 
 ## Usage
 
-Format some plain text files using [smarkt](https://github.com/jondashkyle/smarkt) fields.
+Format some plain text files using [gray-matter](https://github.com/jonschlinkert/gray-matter) fields.
 
 ```
 title: Technopastoral
-----
+---
 date: January 19, 2038
 ----
 tags:
@@ -101,9 +100,9 @@ Provide a custom implementation of `fs`. Ensure the `mkdir` `readdir` `writeFile
 
 #### `parse`
 
-Substitute `smarkt` with your own parser. Must be able to transform a plain text file into a JSON object.
+Substitute `gray-matter` with your own parser. Must be able to transform a plain text file into a JSON object.
 
-#### `parent`
+#### `remove`
 
 Remove part of the `url` for pretty printing. For example, if your content lives in `/content`, but you don’t want to prefix all of your `urls` with `/content`, use `parent` to clean it up. Value can be a string or boolean. If `true`, the `path` of your initial call is used.
 

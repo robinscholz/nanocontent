@@ -1,7 +1,5 @@
+---
 title: About
-----
 view: custom
-----
-text:
-
+---
 Some example text

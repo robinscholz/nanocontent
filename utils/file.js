@@ -48,15 +48,15 @@ function getFileType (extension, filetypes) {
 }
 
 function isFile (pathFile) {
-  assert.equal(typeof pathFile, 'string', 'arg1 pathFile must be type string')
+  assert.equal(typeof pathFile, 'string', 'pathFile must be type string')
   return path.extname(pathFile) !== ''
 }
 
 function getFileMeta (opts) {
-  assert.equal(typeof opts, 'object', 'arg1 opts must be type object')
-  assert.equal(typeof opts.pathFile, 'string', 'arg1 opts.pathFile must be type string')
-  assert.equal(typeof opts.pathRoot, 'string', 'arg1 opts.pathRoot must be type string')
-  assert.equal(typeof opts.filetypes, 'object', 'arg1 opts.filetypes must be type string')
+  assert.strictEqual(typeof opts, 'object', 'opts must be type object')
+  assert.strictEqual(typeof opts.pathFile, 'string', 'opts.pathFile must be type string')
+  assert.strictEqual(typeof opts.pathRoot, 'string', 'opts.pathRoot must be type string')
+  assert.strictEqual(typeof opts.filetypes, 'object', 'opts.filetypes must be type string')
 
   var output = { }
   var ext = path.extname(opts.pathFile)
@@ -64,8 +64,7 @@ function getFileMeta (opts) {
 
   output.name = path.basename(opts.pathFile, ext)
   output.path = formatUrl(pathFile, opts.pathRoot)
-  output.url = formatUrl(pathFile, opts.pathRoot, opts.pathSiteParent)
-  // output.source = opts.pathSource ? (opts.pathSource + output.path) : output.path
+  output.url = formatUrl(pathFile, opts.pathRoot, opts.remove, opts.prefix)
 
   if (ext) {
     output.extension = ext.toLowerCase()
@@ -76,9 +75,10 @@ function getFileMeta (opts) {
   return output
 }
 
-function formatUrl (pathFile, pathRoot, pathSiteParent) {
+function formatUrl (pathFile, pathRoot, remove, prefix) {
   pathFile = pathFile.replace(pathRoot, '')
-  if (pathSiteParent) pathFile = pathFile.replace(pathSiteParent, '')
+  if (remove) pathFile = pathFile.replace(remove, '')
+  if (prefix) pathFile = prefix + pathFile
   pathFile = slash(path.join('/', pathFile))
   return pathFile || '/'
 }
