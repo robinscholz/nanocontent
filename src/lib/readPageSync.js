@@ -1,4 +1,4 @@
-import { formatUrl, filterFile, sortChildren, getFileMeta } from './utils/file'
+import { formatUrl, filterFile, sortChildren, getFileMeta } from '../utils/file'
 import defaults from './defaults'
 
 const slash = require('normalize-path')

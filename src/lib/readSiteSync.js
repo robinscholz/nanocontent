@@ -1,19 +1,18 @@
+import readFilesSync from './readFilesSync'
+
 const slash = require('normalize-path')
 const assert = require('assert')
 const path = require('path')
-const pify = require('pify')
-const glob = pify(require('glob'))
+const glob = require('glob')
 
-const readFiles = require('./readFiles')
+export default readSiteSync
 
-export default readSite
-
-async function readSite(pathSite, opts) {
+function readSiteSync(pathSite, opts) {
   assert.strictEqual(typeof pathSite, 'string', 'pathSite must be type string')
   assert.strictEqual(typeof opts, 'object', 'opts must be type object')
   assert.strictEqual(typeof opts.fs, 'object', 'opts.fs must be type object')
 
   // loop through the files
-  const files = await glob(slash(path.join(pathSite, '/**/*')))
-  return readFiles(files, pathSite, opts)
+  const files = glob.sync(slash(path.join(pathSite, '/**/*')))
+  return readFilesSync(files, pathSite, opts)
 }

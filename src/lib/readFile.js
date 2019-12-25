@@ -1,22 +1,22 @@
 import { getFileMeta } from '../utils/file'
 import { isPage } from '../utils/page'
 import defaults from './defaults'
+import readPage from './readPage'
 
-import readPageSync from './readPageSync'
-
+const promisify = require('promisify-node')
 const assert = require('assert')
 const parser = require('gray-matter')
 const path = require('path')
 
-export default readFileSync
+export default readFile
 
-function readFileSync(pathFile, opts) {
+async function readFile(pathFile, opts) {
   assert.strictEqual(typeof pathFile, 'string', 'pathFile must be type string')
   assert.strictEqual(typeof opts, 'object', 'opts must be type object')
   assert.strictEqual(typeof opts.fs, 'object', 'opts.fs must be type object')
 
-  // page
-  if (isPage(pathFile)) return readPageSync(pathFile, opts)
+  // pages
+  if (isPage(pathFile)) return readPage(pathFile, opts)
 
   const fs = opts.fs
   const parse = typeof opts.parse === 'function' ? opts.parse : parser
@@ -29,6 +29,7 @@ function readFileSync(pathFile, opts) {
     pathFile: pathFile,
     pathRoot: pathRoot,
     filetypes: filetypes,
+    pathSource: opts.source,
     remove: opts.remove,
     prefix: opts.prefix,
   })
@@ -38,10 +39,17 @@ function readFileSync(pathFile, opts) {
 
   try {
     const pathMeta = pathFile + fileExtname
-    const text = fs.readFileSync(pathMeta, encoding)
+    const text = isAsync(fs.readFile)
+      ? await fs.readFile(pathMeta, encoding)
+      : await promisify(fs.readFile)(pathMeta, encoding)
     return Object.assign(parse(text), fileParsed)
   } catch (err) {
-    if (fileParsed.filename) return fileParsed
+    // console.log(fileParsed.filename, err.message)
+    if (fileParsed.filename) return await fileParsed
     else return false
   }
+}
+
+function isAsync(fn) {
+  return fn.constructor.name === 'AsyncFunction'
 }

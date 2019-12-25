@@ -3,14 +3,7 @@ var slash = require('normalize-path')
 var assert = require('assert')
 var path = require('path')
 
-module.exports = {
-  formatUrl: formatUrl,
-  filterFile: filterFile,
-  getFileType: getFileType,
-  getFileMeta: getFileMeta,
-  sortChildren: sortChildren,
-  isFile: isFile,
-}
+export { formatUrl, filterFile, getFileType, getFileMeta, sortChildren, isFile }
 
 function sortChildren(result, active) {
   var ext = path.extname(active)

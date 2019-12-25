@@ -1,10 +1,9 @@
 import defaults from './defaults'
-
 import readFile from './readFile'
 
 const assert = require('assert')
 
-module.exports = readFiles
+export default readFiles
 
 async function readFiles(files, pathSite, opts) {
   assert.strictEqual(typeof files, 'object', 'files must be type object')

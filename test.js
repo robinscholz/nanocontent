@@ -1,5 +1,5 @@
 const test = require('ava')
-const nanocontent = require('.')
+const nanocontent = require('./dist')
 
 test('readPageSync works', function(t) {
   var page = nanocontent.readPageSync('example/content/about')

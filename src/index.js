@@ -1,5 +1,6 @@
+import * as lib from './lib/index.js'
+
 const fs = require('fs-extra')
-const lib = require('./lib')
 
 module.exports = {
   readFile: readFile,
@@ -9,45 +10,45 @@ module.exports = {
   readPage: readPage,
   readPageSync: readPageSync,
   readSite: readSite,
-  readSiteSync: readSiteSync
+  readSiteSync: readSiteSync,
 }
 
-function readFile (pathFile, opts, callback) {
+function readFile(pathFile, opts, callback) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readFile(pathFile, opts, callback)
 }
 
-function readFileSync (pathFile, opts) {
+function readFileSync(pathFile, opts) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readFileSync(pathFile, opts)
 }
 
-function readFiles (files, pathSite, opts, callback) {
+function readFiles(files, pathSite, opts, callback) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readFiles(files, pathSite, opts, callback)
 }
 
-function readFilesSync (pathFile, opts) {
+function readFilesSync(pathFile, opts) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readFilesSync(pathFile, opts)
 }
 
-function readPage (pathPage, opts, callback) {
+function readPage(pathPage, opts, callback) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readPage(pathPage, opts, callback)
 }
 
-function readPageSync (pathPage, opts) {
+function readPageSync(pathPage, opts) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readPageSync(pathPage, opts)
 }
 
-function readSite (pathSite, opts, callback) {
+function readSite(pathSite, opts, callback) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readSite(pathSite, opts, callback)
 }
 
-function readSiteSync (pathSite, opts) {
+function readSiteSync(pathSite, opts) {
   opts = Object.assign({ fs: fs }, opts || {})
   return lib.readSiteSync(pathSite, opts)
 }
