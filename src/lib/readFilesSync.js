@@ -1,5 +1,4 @@
 import defaults from './defaults'
-
 import readFileSync from './readFileSync'
 
 const assert = require('assert')
@@ -18,7 +17,7 @@ function readFilesSync(files, pathSite, opts) {
     files.push(pathSite)
   }
 
-  files.forEach(pathFile => {
+  for (const pathFile of files) {
     if (typeof opts.onFile === 'function') opts.onFile(pathFile)
     let content = readFileSync(pathFile, opts)
     if (content && !content.name.match(defaults.ignore)) {
@@ -30,7 +29,7 @@ function readFilesSync(files, pathSite, opts) {
 
       output[key] = content
     }
-  })
+  }
 
   return output
 }

@@ -17,10 +17,11 @@ async function readFiles(files, pathSite, opts) {
     files.push(pathSite)
   }
 
-  await files.map(read)
-  return output
+  // await files.map(read)
+  // return output
 
-  async function read(pathFile) {
+  for (const pathFile of files) {
+    if (typeof opts.onFile === 'function') opts.onFile(pathFile)
     let content = await readFile(pathFile, opts)
     if (content && !content.name.match(defaults.ignore)) {
       const key = content.url
@@ -31,6 +32,7 @@ async function readFiles(files, pathSite, opts) {
 
       output[key] = content
     }
-    return content
   }
+
+  return output
 }

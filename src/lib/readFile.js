@@ -3,7 +3,7 @@ import { isPage } from '../utils/page'
 import defaults from './defaults'
 import readPage from './readPage'
 
-const promisify = require('promisify-node')
+const pify = require('pify')
 const assert = require('assert')
 const parser = require('gray-matter')
 const path = require('path')
@@ -41,12 +41,11 @@ async function readFile(pathFile, opts) {
     const pathMeta = pathFile + fileExtname
     const text = isAsync(fs.readFile)
       ? await fs.readFile(pathMeta, encoding)
-      : await promisify(fs.readFile)(pathMeta, encoding)
+      : await pify(fs.readFile)(pathMeta, encoding)
     return Object.assign(parse(text), fileParsed)
   } catch (err) {
-    // console.log(fileParsed.filename, err.message)
     if (fileParsed.filename) return await fileParsed
-    else return false
+    else return Promise.resolve(false)
   }
 }
 
